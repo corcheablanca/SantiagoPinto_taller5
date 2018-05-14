@@ -1,10 +1,8 @@
-caos.pdf: 
-	c++ caos.cpp
+cuerda.gif: 
+	c++ placas.cpp
 
-	mv "./a.out" "caos.x" 
+	./a.out>data.txt
 
-	./caos.x>data.txt
-
-	python caos.py
+	python grafica.py
 
 
