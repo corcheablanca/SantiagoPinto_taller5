@@ -32,6 +32,7 @@ int main(){
   int N=2*(L/h)*(L/h);
   
   float V[size][size];
+  float Vnuevo[size][size];
 
 //rellenar la matriz con la scondiciones iniciales y de frontera
 for (int i=0;i< size;i++)
@@ -62,6 +63,34 @@ V[i][j] = 0.0;
 }
 
 
+// cambia los valores guardados en la lista
+for(int t=0; t<100; t++)
+{
+
+for(int i=1; i<(size-1); i++)
+{
+for(int j=1; j<(size-1);j++)
+{
+
+ if( (j*h > 3.5 ) or ( j*h < 1.5 )  or (i < 205) or (i> 307 ) )
+{ 
+V[i][j] =Vnuevo[i][j]= U(V[i+1][j],V[i-1][j],V[i][j-1], V[i][j+1]);
+}
+   
+}
+}
+
+for(int i=0; i<size; i++)
+{
+for(int j=0; j<(size);j++)
+{
+  V[i][j]=Vnuevo[i][j];  
+}
+}
+    
+}
+//imprimir
+
 for (int i=0;i< size;i++)
 {
 for (int j=0;j< size;j++)
@@ -70,32 +99,6 @@ cout<<V[i][j];
 }
 cout<<endl;
 }
-/**
-// cambia los valores guardados en la lista
-for(int t=0; t<; t++)
-{
-for(int i=1; i<(pasosx);i++)
-{
-    posicion = i*dt;
-    lista2[i]= Udtmasuno(lista1[i], vel, dt, dx,lista1[(i-1)],lista1[(i+1)], lista[(i)]);
-    if(t%10000==0)
-{ 
-    cout<< " "<<lista2[i]<<" ";
-    if(i==(pasosx-1))
-{
-    cout << endl;
-}
-}
-}
-
-for(int i=0; i<pasosx;i++)
-{
-    lista[i]=lista1[i];
-    lista1[i]=lista2[i];
-    
-}
-
-}**/
 
   return 0;
 }
