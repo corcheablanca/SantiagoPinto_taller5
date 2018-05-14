@@ -2,17 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 Matrix=np.loadtxt("data.txt")
-
-V=Matrix[0:512,:]
-Ex=Matrix[513:1025,:-2]
-Ey=Matrix[1026:1537,:-2]
-
-x=np.linspace(0,5,512)
+V=Matrix[0:511,:]
+Ex=Matrix[512:1022,:-2]
+Ey=Matrix[1025:1535,:-2]
+x=np.linspace(0,500,510)
 plt.imshow(V)
-plt.savefig("placas.pdf")
-
-#no logre que me funcionara :(
 plt.streamplot(x,x,Ex,Ey)
 plt.show()
-
-
+plt.savefig("placas.pdf")

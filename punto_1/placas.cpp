@@ -33,8 +33,6 @@ int main(){
   
   float V[size][size];
   float Vnuevo[size][size];
- /** float X[size][size-1];
-  float Y[size-1][size];**/
 
 //rellenar la matriz con la scondiciones iniciales y de frontera
 for (int i=0;i< size;i++)
@@ -44,29 +42,34 @@ for (int j=0;j< size;j++)
 //rayita superior
 if( ( j*h >= 1.5) and ( j*h <= 3.5) and (i == 205) )
 { 
-V[i][j] = V_0/2.0;  
+V[i][j] = V_0/2.0;
+Vnuevo[i][j]=  V_0/2.0;
 }
 //rayita inferior	
 else if( ( j*h >= 1.5 ) and ( j*h <= 3.5 ) and (i == 307) )
 { 
 V[i][j] = -V_0/2.0;
+Vnuevo[i][j]= -V_0/2.0;
 }	
 //relleno	
-else if( (j*h >= 1.5 ) and ( j*h <= 3.5 )  and (i > 205) and (i< 307 ) )
+else if( (j*h >= 1.5 ) and ( j*h <= 3.5 )  and (i>205) and (i<307 ) )
 { 
 V[i][j] = V_0;
+Vnuevo[i][j]= V_0;
+
 }
+
 // todo lo demas
 else
 { 
 V[i][j] = 0.0; 
+Vnuevo[i][j]= 0.0;
 }
 }	
 }
 
-
 // cambia los valores guardados en la lista
-for(int t=0; t<100; t++)
+for(int t=0; t<N; t++)
 {
 
 for(int i=1; i<(size-1); i++)
@@ -74,9 +77,9 @@ for(int i=1; i<(size-1); i++)
 for(int j=1; j<(size-1);j++)
 {
 
- if( (j*h > 3.5 ) or ( j*h < 1.5 )  or (i < 205) or (i> 307 ) )
+ if( (j*h > 3.5 ) or ( j*h < 1.5 )  or (i < 205) or (i > 307 ) )
 { 
-V[i][j] =Vnuevo[i][j]= U(V[i+1][j],V[i-1][j],V[i][j-1], V[i][j+1]);
+Vnuevo[i][j]= U(V[i+1][j],V[i-1][j],V[i][j-1], V[i][j+1]);
 }
    
 }
@@ -107,7 +110,7 @@ for (int i=0;i< size;i++)
 {
 for (int j=0;j< size-1;j++)
 {  
-cout<<((V[i][j]-V[i][j+1])/(2.0*h))<<" ";
+cout<<(V[i][j]-V[i][j+1])/2.0 << " ";
 }
 cout<<" "<<0;
 cout<<endl;
@@ -117,7 +120,7 @@ for (int i=0;i< size-1;i++)
 {
 for (int j=0;j< size;j++)
 {  
-cout<<((V[i][j]-V[i+1][j])/(2.0*h))<<" ";
+cout<<(V[i][j]-V[i+1][j])/2.0 << " ";
 }
 cout<<endl;
 }
