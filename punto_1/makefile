@@ -1,5 +1,10 @@
-cuerda.gif: 
-	c++ cuerda.cpp
-	./a.out>data.txt
-	python animacion.py
+caos.pdf: 
+	c++ caos.cpp
+
+	mv "./a.out" "caos.x" 
+
+	./caos.x>data.txt
+
+	python caos.py
+
 
